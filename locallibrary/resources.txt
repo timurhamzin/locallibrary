@@ -1,0 +1,8 @@
+1. Проходим официальные туториал и в дальнейшем читаем документацию здесь:
+https://docs.djangoproject.com/en/2.2/
+
+2. Затем выполняем туториал здесь:
+https://djangogirls.org/resources/
+
+3. На этой странице много полезной информации, желаетльно делать вдумчиво и возвращаться,
+если что-то не понятно: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website
