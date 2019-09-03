@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 from catalog.models import Book, Author, BookInstance, Genre
 
+
 def index(request):
     """View function for home page of site."""
 
@@ -31,11 +32,26 @@ def index(request):
 
 from django.views import generic
 
+
 class BookListView(generic.ListView):
     model = Book
+    paginate_by = 1
     # context_object_name = 'my_book_list'   # your own name for the list as a template variable
     # queryset = Book.objects.all()[:5] # Get 5 books containing the title war
     # template_name = 'books/my_arbitrary_template_name_list.html'  # Specify your own template name/location
 
+
 class BookDetailView(generic.DetailView):
     model = Book
+
+
+class AuthorListView(generic.ListView):
+    model = Author
+    paginate_by = 1
+    # context_object_name = 'my_book_list'   # your own name for the list as a template variable
+    # queryset = Book.objects.all()[:5] # Get 5 books containing the title war
+    # template_name = 'books/my_arbitrary_template_name_list.html'  # Specify your own template name/location
+
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
