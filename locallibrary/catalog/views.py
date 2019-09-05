@@ -4,7 +4,6 @@ from django.shortcuts import render
 
 from catalog.models import Book, Author, BookInstance, Genre
 
-
 def index(request):
     """View function for home page of site."""
 
@@ -19,12 +18,16 @@ def index(request):
     num_authors = Author.objects.count()
     num_authors_j = Author.objects.filter(first_name__contains='J').count()
 
+    # Number of visits to this view, as counted in the session variable.
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
+
     context = {
         'num_books': num_books,
         'num_instances': num_instances,
         'num_instances_available': num_instances_available,
         'num_authors': num_authors,
-        'num_authors_j': num_authors_j,
+        'num_visits': num_visits,
     }
 
     # Render the HTML template index.html with the data in the context variable
@@ -55,3 +58,9 @@ class AuthorListView(generic.ListView):
 
 class AuthorDetailView(generic.DetailView):
     model = Author
+
+    def get_context_data(self, **kwargs):
+        obj = kwargs['object']
+        context = super(AuthorDetailView, self).get_context_data(**kwargs)
+        context.update({'next': Author.objects.filter(id__gt=obj.id).order_by('id').first()})
+        return context

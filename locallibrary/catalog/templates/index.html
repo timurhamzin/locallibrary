@@ -16,4 +16,7 @@
     <li><strong>Authors:</strong> {{ num_authors }}</li>
     <li><strong>Authors containing J:</strong> {{ num_authors_j }}</li>
   </ul>
+
+<p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+
 {% endblock %}
