@@ -1,11 +1,19 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Author: {{ author.last_name }}</h1>
+  {% if perms.catalog.can_mark_returned %}
+    <a href="{% url 'author_create' %}">Create</a> /
+    <a href="{% url 'author_update' author.id %}">Update</a> /
+    <a href="{% url 'author_delete' author.id %}">Delete</a>
+    <br><br>
+  {% endif %}
 
-  <div style="margin-left:20px;margin-top:20px">
-      <p><strong>Author:</strong> {{ author }}</p>
-  </div>
+  <h1>Author: {{ author }}</h1>
+<p>({{ author.date_of_birth }} - {% if author.date_of_death %} {{ author.date_of_death }} {% endif %})</p>
+
+<!--  <div style="margin-left:20px;margin-top:20px">-->
+<!--      <p><strong>Author:</strong> {{ author }}</p>-->
+<!--  </div>-->
   <h1>Books by this author:</h1>
   {% if author.book_set %}
   <ul>
@@ -18,5 +26,16 @@
   {% else %}
     <p>There are no books in the library.</p>
   {% endif %}
-  <a href="{{ next.get_absolute_url }}"> {{ next }} </a>
+  {% if previous %}
+    <a href= "{{ previous.get_absolute_url }}"> Previous author </a>
+  {% else  %}
+    No previous author
+  {% endif %}
+  <span style="margin-left: 40px">
+    {% if next %}
+      <a href= "{{ next.get_absolute_url }}"> Next author </a>
+    {% elif previous %}
+      No next author
+    {% endif %}
+  </span>
 {% endblock %}
