@@ -1,12 +1,8 @@
 venv/
 *.pyc
 *~
-__pycache__/
-db.sqlite3
-/static
-.DS_Store
-.idea/git
-.idea/
-migrations
+../__pycache__
 ../.idea
-*/__pycache__
+# Database
+db.sqlite3
+migrations
