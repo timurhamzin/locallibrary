@@ -8,5 +8,5 @@ db.sqlite3
 .idea/git
 .idea/
 migrations
-../.idea
+../.idea/
 */__pycache__
